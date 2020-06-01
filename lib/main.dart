@@ -32,9 +32,9 @@ class PerguntaAppState extends State<PerguntaApp>{
         body: Column(
           children: [
             Questao(perguntas[perguntaSelecionada]),
-            Resposta("Resposta 1"),  
-            Resposta("Resposta 2"),  
-            Resposta("Resposta 3"),  
+            Resposta("Resposta 1", responder),  
+            Resposta("Resposta 2", responder),  
+            Resposta("Resposta 3", responder),  
           ],
         ),
       )
