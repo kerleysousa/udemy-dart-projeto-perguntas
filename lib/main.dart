@@ -8,18 +8,17 @@ main(){
 
 class PerguntaAppState extends State<PerguntaApp>{
 
-  var perguntaSelecionada = 0;
+  var _perguntaSelecionada = 0;
 
-  void responder(){
-    setState(() {
-      perguntaSelecionada++;
-    });
-      print("Resposta $perguntaSelecionada");
+  void _responder(){
+    if(temPergunta){
+      setState(() {
+        _perguntaSelecionada++;
+      });
+    }
   }
-
-  Widget build(BuildContext context){
     
-  final List<Map<String, Object>> perguntas = [
+  final List<Map<String, Object>> _perguntas = [
     {
       'pergunta': 'Qual a sua cor favorita?',
       'alternativas': ["Azul","Amarelo","Vermelho","Branco"]
@@ -30,23 +29,28 @@ class PerguntaAppState extends State<PerguntaApp>{
     }  
   ];
 
-  List<String> lista = perguntas[perguntaSelecionada]['alternativas'];
+  bool get temPergunta{
+    return _perguntaSelecionada < _perguntas.length;
+  }
 
-  List<Widget> alternativas = lista
-    .map((alternativa) => Resposta(alternativa, responder))
-    .toList();
+  Widget build(BuildContext context){
+
+  List<String> lista = temPergunta
+  ? _perguntas[_perguntaSelecionada]['alternativas']
+  : null;
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text("Perguntas"),
         ),
-        body: Column(
+        body: temPergunta ?
+        Column(
           children: [
-            Questao(perguntas[perguntaSelecionada]['pergunta']),
-            ...alternativas
+            Questao(_perguntas[_perguntaSelecionada]['pergunta']),
+            ...lista.map((alternativa) => Resposta(alternativa, _responder)).toList()
           ],
-        ),
+        ): null,
       )
     );
   }
