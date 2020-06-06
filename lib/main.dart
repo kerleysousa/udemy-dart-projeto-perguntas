@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_perguntas/questoes.dart';
 import 'package:projeto_perguntas/resposta.dart';
+import 'package:projeto_perguntas/resultado.dart';
+import 'package:projeto_perguntas/questionario.dart';
 
 main(){
   runApp(new PerguntaApp());
@@ -8,17 +10,17 @@ main(){
 
 class PerguntaAppState extends State<PerguntaApp>{
 
-  var _perguntaSelecionada = 0;
+  var perguntaSelecionada = 0;
 
-  void _responder(){
+  void responder(){
     if(temPergunta){
       setState(() {
-        _perguntaSelecionada++;
+        perguntaSelecionada++;
       });
     }
   }
     
-  final List<Map<String, Object>> _perguntas = [
+  final List<Map<String, Object>> perguntas = [
     {
       'pergunta': 'Qual a sua cor favorita?',
       'alternativas': ["Azul","Amarelo","Vermelho","Branco"]
@@ -30,27 +32,23 @@ class PerguntaAppState extends State<PerguntaApp>{
   ];
 
   bool get temPergunta{
-    return _perguntaSelecionada < _perguntas.length;
+    return perguntaSelecionada < perguntas.length;
   }
 
   Widget build(BuildContext context){
-
-  List<String> lista = temPergunta
-  ? _perguntas[_perguntaSelecionada]['alternativas']
-  : null;
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text("Perguntas"),
         ),
-        body: temPergunta ?
-        Column(
-          children: [
-            Questao(_perguntas[_perguntaSelecionada]['pergunta']),
-            ...lista.map((alternativa) => Resposta(alternativa, _responder)).toList()
-          ],
-        ): null,
+        body: temPergunta 
+        ? Questionario(
+          perguntas: perguntas, 
+          perguntaSelecionada: perguntaSelecionada, 
+          responder: responder
+        )
+        : Resultado(),
       )
     );
   }
