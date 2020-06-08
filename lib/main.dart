@@ -40,7 +40,13 @@ class PerguntaAppState extends State<PerguntaApp>{
         pontuacaoTotal += pontuacao;
       });
     }
-    print(pontuacaoTotal);
+  }
+
+  void reiniciarQuestionario() {
+    setState(() {
+      perguntaSelecionada = 0;
+      pontuacaoTotal = 0;
+    });
   }
 
   bool get temPergunta{
@@ -54,13 +60,20 @@ class PerguntaAppState extends State<PerguntaApp>{
         appBar: AppBar(
           title: Text("Perguntas"),
         ),
-        body: temPergunta 
-        ? Questionario(
-          perguntas: perguntas, 
-          perguntaSelecionada: perguntaSelecionada, 
-          responder: responder
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              temPergunta 
+              ? Questionario(
+                perguntas: perguntas, 
+                perguntaSelecionada: perguntaSelecionada, 
+                responder: responder
+              )
+              : Resultado(pontuacaoTotal, reiniciarQuestionario),
+            ],
+          ),
         )
-        : Resultado(pontuacaoTotal),
       )
     );
   }
