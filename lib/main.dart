@@ -1,35 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_perguntas/questoes.dart';
-import 'package:projeto_perguntas/resposta.dart';
-import 'package:projeto_perguntas/resultado.dart';
 import 'package:projeto_perguntas/questionario.dart';
+import 'package:projeto_perguntas/resultado.dart';
+
 
 main(){
   runApp(new PerguntaApp());
 }
 
 class PerguntaAppState extends State<PerguntaApp>{
-
-  var perguntaSelecionada = 0;
-
-  void responder(){
-    if(temPergunta){
-      setState(() {
-        perguntaSelecionada++;
-      });
-    }
-  }
-    
+  
   final List<Map<String, Object>> perguntas = [
     {
       'pergunta': 'Qual a sua cor favorita?',
-      'alternativas': ["Azul","Amarelo","Vermelho","Branco"]
+      'alternativas': [
+        {"texto": "Azul", "valor": 8},
+        {"texto": "Amarelo", "valor": 6},
+        {"texto": "Vermelho", "valor": 7},
+        {"texto": "Branco","valor": 10}
+        ]
     },
     {
       'pergunta': 'Qual seu animal favorito?',
-      'alternativas': ["Cachorro","Gato","Peixe","Pássaro"]
+      'alternativas': [
+        {"texto": "Cachorro", "valor": 10},
+        {"texto": "Gato", "valor": 1},
+        {"texto": "Peixe", "valor": 3},
+        {"texto": "Pássaro", "valor": 5}
+        ]
     }  
   ];
+
+  var perguntaSelecionada = 0;
+  var pontuacaoTotal = 0;
+
+  void responder(int pontuacao){
+    if(temPergunta){
+      setState(() {
+        perguntaSelecionada++;
+        pontuacaoTotal += pontuacao;
+      });
+    }
+    print(pontuacaoTotal);
+  }
 
   bool get temPergunta{
     return perguntaSelecionada < perguntas.length;
@@ -48,7 +60,7 @@ class PerguntaAppState extends State<PerguntaApp>{
           perguntaSelecionada: perguntaSelecionada, 
           responder: responder
         )
-        : Resultado(),
+        : Resultado(pontuacaoTotal),
       )
     );
   }
