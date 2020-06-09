@@ -23,9 +23,18 @@ class PerguntaAppState extends State<PerguntaApp>{
       'pergunta': 'Qual seu animal favorito?',
       'alternativas': [
         {"texto": "Cachorro", "valor": 10},
-        {"texto": "Gato", "valor": 1},
+        {"texto": "Gato", "valor": 0},
         {"texto": "Peixe", "valor": 3},
         {"texto": "Pássaro", "valor": 5}
+        ]
+    },  
+    {
+      'pergunta': 'Qual seu genero musical favorito?',
+      'alternativas': [
+        {"texto": "Rock", "valor": 10},
+        {"texto": "Clássico", "valor": 8},
+        {"texto": "Sertanejo", "valor": 6},
+        {"texto": "Funk", "valor": 0}
         ]
     }  
   ];
