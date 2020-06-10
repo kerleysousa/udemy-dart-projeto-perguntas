@@ -69,21 +69,15 @@ class PerguntaAppState extends State<PerguntaApp>{
         appBar: AppBar(
           title: Text("Perguntas"),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              temPergunta 
-              ? Questionario(
-                perguntas: perguntas, 
-                perguntaSelecionada: perguntaSelecionada, 
-                responder: responder
-              )
-              : Resultado(pontuacaoTotal, reiniciarQuestionario),
-            ],
+        body:
+          temPergunta 
+          ? Questionario(
+            perguntas: perguntas, 
+            perguntaSelecionada: perguntaSelecionada, 
+            responder: responder
+          )
+          : Resultado(pontuacaoTotal, reiniciarQuestionario),
           ),
-        )
-      )
     );
   }
 }

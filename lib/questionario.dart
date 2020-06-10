@@ -27,12 +27,14 @@ class Questionario extends StatelessWidget {
   : null;
 
     return Column(
-          children: <Widget> [
-            Questao(perguntas[perguntaSelecionada]['pergunta']),
-            ...lista
-            .map((alternativa) => Resposta(alternativa['texto'], () => responder(alternativa['valor'])))
-            .toList()
-          ],
-        );
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget> [
+        Center(
+          child: Questao(perguntas[perguntaSelecionada]['pergunta'])),
+          ...lista
+          .map((alternativa) => Resposta(alternativa['texto'], () => responder(alternativa['valor'])))
+          .toList()
+      ],
+    );
   }
 }

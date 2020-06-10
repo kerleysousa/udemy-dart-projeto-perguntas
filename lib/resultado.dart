@@ -5,7 +5,6 @@ class Resultado extends StatelessWidget {
   final int pontuacao;
   void Function() quandoReiniciar;
 
-
   Resultado(this.pontuacao, this.quandoReiniciar);
 
   get fraseResultado{
